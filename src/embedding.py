@@ -1,28 +1,36 @@
 """
-embedding.py
-Transformer-based embedding generation.
+embedding.py - minimal memory footprint.
 """
 
 from typing import List, Union
 import numpy as np
-from sentence_transformers import SentenceTransformer
 
-MODEL_ALIASES = {
-    "minilm": "paraphrase-MiniLM-L3-v2",
-    "bert":   "paraphrase-MiniLM-L3-v2",
-    "roberta":"paraphrase-MiniLM-L3-v2",
-}
-
-_model_cache: dict = {}
+_model = None
+_use_tfidf = False
 
 
-def load_model(model_name: str = "minilm") -> SentenceTransformer:
-    resolved = MODEL_ALIASES.get(model_name, "paraphrase-MiniLM-L3-v2")
-    if resolved not in _model_cache:
-        _model_cache[resolved] = SentenceTransformer(resolved)
-    return _model_cache[resolved]
+def _load():
+    global _model, _use_tfidf
+    if _model is not None:
+        return
+    try:
+        from sentence_transformers import SentenceTransformer
+        _model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
+        _use_tfidf = False
+    except Exception as e:
+        print(f"Falling back to TF-IDF: {e}")
+        _use_tfidf = True
+        _model = True  # sentinel
 
 
 def get_embedding(text: Union[str, List[str]], model_name: str = "minilm") -> np.ndarray:
-    model = load_model(model_name)
-    return model.encode(text, convert_to_numpy=True, show_progress_bar=False)
+    _load()
+    texts = [text] if isinstance(text, str) else text
+    if _use_tfidf:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        vec = TfidfVectorizer()
+        matrix = vec.fit_transform(texts).toarray()
+        return matrix[0] if isinstance(text, str) else matrix
+    else:
+        result = _model.encode(texts, convert_to_numpy=True, show_progress_bar=False)
+        return result[0] if isinstance(text, str) else result

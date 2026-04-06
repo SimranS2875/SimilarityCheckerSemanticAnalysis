@@ -14,6 +14,10 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 
 from backend.src.evaluator import evaluate as run_evaluate
 
+# Preload model at startup to avoid mid-request OOM
+from backend.src.embedding import _load as preload_model
+preload_model()
+
 app = FastAPI(
     title="Answer Evaluation API",
     description="Transformer-based semantic similarity scoring for descriptive answers.",
