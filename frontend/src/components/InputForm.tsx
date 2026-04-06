@@ -9,9 +9,9 @@ interface Props {
 }
 
 const MODELS = [
-  { value: "minilm",  label: "MiniLM-L3",  desc: "Fastest · Recommended" },
-  { value: "bert",    label: "MiniLM-L3",  desc: "Balanced accuracy" },
-  { value: "roberta", label: "MiniLM-L3",  desc: "Highest accuracy" },
+  { value: "minilm",  label: "MiniLM",   desc: "Fastest · Recommended" },
+  { value: "bert",    label: "BERT",      desc: "Balanced accuracy" },
+  { value: "roberta", label: "RoBERTa",   desc: "Highest accuracy" },
 ];
 
 export default function InputForm({ onSubmit, loading }: Props) {
