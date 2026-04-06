@@ -1,0 +1,8 @@
+id,type,predicted_score,human_score,absolute_error,semantic_similarity,keyword_coverage
+TC001,exact_match,10.0,10.0,0.0,1.0,1.0
+TC002,paraphrased,7.45,8.0,0.55,0.893,0.4
+TC003,partial_answer,6.41,4.0,2.41,0.787,0.3
+TC004,irrelevant_answer,0.01,0.0,0.01,0.002,0.0
+TC005,mixed_correctness,6.66,3.5,3.16,0.737,0.5
+TC006,paraphrased,6.61,7.5,0.89,0.772,0.4
+TC007,partial_answer,3.34,3.0,0.34,0.434,0.1

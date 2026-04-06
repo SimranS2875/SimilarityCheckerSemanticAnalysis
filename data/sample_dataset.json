@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "question": "What is machine learning?",
+    "model_answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves.",
+    "student_variants": [
+      {"label": "exact_match", "answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It focuses on developing computer programs that can access data and use it to learn for themselves."},
+      {"label": "paraphrased", "answer": "Machine learning is a branch of AI where computers are trained to learn patterns from data and make decisions without being directly programmed for each task."},
+      {"label": "partial", "answer": "Machine learning is part of artificial intelligence. It helps computers learn from data."},
+      {"label": "irrelevant", "answer": "The weather today is sunny and warm. I went to the park and had a great time."},
+      {"label": "mixed", "answer": "Machine learning involves training algorithms on data. It is used in many applications like image recognition. However, it requires a lot of computational power and can be expensive."}
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Explain the concept of photosynthesis.",
+    "model_answer": "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize nutrients from carbon dioxide and water. It involves the conversion of light energy into chemical energy stored in glucose, releasing oxygen as a byproduct.",
+    "student_variants": [
+      {"label": "exact_match", "answer": "Photosynthesis is the process by which green plants and some other organisms use sunlight to synthesize nutrients from carbon dioxide and water. It involves the conversion of light energy into chemical energy stored in glucose, releasing oxygen as a byproduct."},
+      {"label": "paraphrased", "answer": "Photosynthesis is how plants make their own food using sunlight, water, and carbon dioxide. The light energy is converted into glucose and oxygen is released in the process."},
+      {"label": "partial", "answer": "Photosynthesis is done by plants using sunlight and water."},
+      {"label": "irrelevant", "answer": "The stock market crashed in 2008 due to the housing bubble. Many banks went bankrupt."},
+      {"label": "mixed", "answer": "Photosynthesis uses sunlight to create energy. Plants need water for this process. The result is glucose which plants use for growth, but I am not sure about the role of carbon dioxide."}
+    ]
+  },
+  {
+    "id": 3,
+    "question": "What is Newton's second law of motion?",
+    "model_answer": "Newton's second law of motion states that the acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. This is expressed as F = ma, where F is force, m is mass, and a is acceleration.",
+    "student_variants": [
+      {"label": "exact_match", "answer": "Newton's second law of motion states that the acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. This is expressed as F = ma, where F is force, m is mass, and a is acceleration."},
+      {"label": "paraphrased", "answer": "According to Newton's second law, force equals mass times acceleration (F=ma). The greater the force applied to an object, the more it accelerates, while heavier objects require more force to achieve the same acceleration."},
+      {"label": "partial", "answer": "Newton's second law says F equals ma."},
+      {"label": "irrelevant", "answer": "Gravity is a force that pulls objects toward the Earth. The moon orbits the Earth due to gravitational attraction."},
+      {"label": "mixed", "answer": "Newton's second law involves force and mass. The formula is F=ma. Acceleration increases with force but I think mass does not really matter much in this equation."}
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Describe the water cycle.",
+    "model_answer": "The water cycle, also known as the hydrological cycle, describes the continuous movement of water on, above, and below the surface of the Earth. It includes processes such as evaporation, condensation, precipitation, and collection. Water evaporates from oceans and lakes, forms clouds through condensation, falls as precipitation, and collects in bodies of water.",
+    "student_variants": [
+      {"label": "paraphrased", "answer": "The water cycle is the continuous process of water moving through the environment. Water evaporates from water bodies, rises into the atmosphere where it condenses into clouds, then falls back to Earth as rain or snow, and eventually flows back into rivers and oceans."},
+      {"label": "partial", "answer": "The water cycle involves evaporation and rain. Water goes up and comes back down."},
+      {"label": "mixed", "answer": "The water cycle includes evaporation where water turns to vapor, and precipitation where it falls as rain. Condensation forms clouds. However, I am not sure about the collection phase or how groundwater fits in."}
+    ]
+  },
+  {
+    "id": 5,
+    "question": "What is the role of DNA in living organisms?",
+    "model_answer": "DNA, or deoxyribonucleic acid, is the hereditary material in humans and almost all other organisms. It carries the genetic instructions for the development, functioning, growth, and reproduction of all known organisms. DNA is organized into structures called chromosomes and is found in the nucleus of cells.",
+    "student_variants": [
+      {"label": "paraphrased", "answer": "DNA is the genetic blueprint of living organisms. It contains instructions that determine how organisms develop and function. Found in cell nuclei, DNA is organized into chromosomes and is passed from parents to offspring."},
+      {"label": "partial", "answer": "DNA carries genetic information and is found in cells."},
+      {"label": "irrelevant", "answer": "The internet was invented in the late 20th century and has transformed communication worldwide."}
+    ]
+  }
+]

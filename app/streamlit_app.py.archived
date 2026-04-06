@@ -1,0 +1,176 @@
+"""
+streamlit_app.py
+Automated Answer Evaluation System — Streamlit UI
+Run: streamlit run app/streamlit_app.py
+"""
+
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+import streamlit as st
+import pandas as pd
+import json
+from src.evaluator import evaluate
+
+# ── Page config ──────────────────────────────────────────────────────────────
+st.set_page_config(
+    page_title="Automated Answer Evaluation System",
+    page_icon="📝",
+    layout="wide",
+)
+
+st.title("📝 Automated Answer Evaluation System")
+st.caption("Transformer-Based Semantic Similarity Scoring")
+
+# ── Sidebar ───────────────────────────────────────────────────────────────────
+with st.sidebar:
+    st.header("⚙️ Settings")
+    model_choice = st.selectbox(
+        "Embedding Model",
+        options=["minilm", "bert", "roberta"],
+        index=0,
+        help="all-MiniLM-L6-v2 is fastest. BERT/RoBERTa are heavier.",
+    )
+    max_score = st.slider("Max Score", min_value=5, max_value=100, value=10, step=5)
+    st.markdown("---")
+    st.markdown("**Scoring Formula**")
+    st.code("0.7 × semantic_sim\n+ 0.3 × keyword_coverage", language="text")
+
+# ── Input section ─────────────────────────────────────────────────────────────
+col1, col2 = st.columns(2)
+
+with col1:
+    question = st.text_area(
+        "❓ Question",
+        placeholder="Enter the exam question here...",
+        height=100,
+    )
+    model_answer = st.text_area(
+        "✅ Model Answer (Reference)",
+        placeholder="Enter the ideal/reference answer...",
+        height=200,
+    )
+
+with col2:
+    student_answer = st.text_area(
+        "🎓 Student Answer",
+        placeholder="Enter the student's answer...",
+        height=320,
+    )
+
+evaluate_btn = st.button("🔍 Evaluate Answer", type="primary", use_container_width=True)
+
+# ── Evaluation ────────────────────────────────────────────────────────────────
+if evaluate_btn:
+    if not model_answer.strip() or not student_answer.strip():
+        st.warning("Please provide both a model answer and a student answer.")
+    else:
+        with st.spinner("Evaluating... (loading model on first run may take a moment)"):
+            result = evaluate(
+                question=question,
+                model_answer=model_answer,
+                student_answer=student_answer,
+                model_name=model_choice,
+                max_score=float(max_score),
+            )
+
+        st.markdown("---")
+        st.subheader("📊 Evaluation Results")
+
+        # ── Score display ─────────────────────────────────────────────────────
+        r1, r2, r3, r4 = st.columns(4)
+        r1.metric("🏆 Score", f"{result['score']} / {result['max_score']}")
+        r2.metric("🔤 Grade", result["score_label"])
+        r3.metric("🧠 Semantic Similarity", f"{result['semantic_similarity_pct']}%")
+        r4.metric("🔑 Keyword Coverage", f"{result['keyword_coverage_pct']}%")
+
+        # Progress bar
+        progress_val = result["score"] / result["max_score"]
+        bar_color = "green" if progress_val >= 0.7 else ("orange" if progress_val >= 0.4 else "red")
+        st.markdown(f"**Score Progress** ({result['score_label']})")
+        st.progress(progress_val)
+
+        st.markdown("---")
+
+        # ── Feedback columns ──────────────────────────────────────────────────
+        fc1, fc2, fc3 = st.columns(3)
+
+        with fc1:
+            st.markdown("### ✅ Strengths")
+            if result["strengths"]:
+                for s in result["strengths"]:
+                    st.success(s)
+            else:
+                st.info("No notable strengths detected.")
+
+        with fc2:
+            st.markdown("### ❌ Missing Concepts")
+            if result["missing_concepts"]:
+                for m in result["missing_concepts"]:
+                    st.error(m)
+            else:
+                st.success("No major concepts missing.")
+
+        with fc3:
+            st.markdown("### 💡 Improvements")
+            for imp in result["improvements"]:
+                st.warning(imp)
+
+        # ── Keyword analysis ──────────────────────────────────────────────────
+        st.markdown("---")
+        with st.expander("🔑 Keyword Analysis", expanded=False):
+            kw_col1, kw_col2 = st.columns(2)
+            with kw_col1:
+                st.markdown("**Model Keywords**")
+                st.write(", ".join(result.get("model_keywords", [])))
+            with kw_col2:
+                missing_kws = []
+                for mc in result["missing_concepts"]:
+                    if mc.startswith("Missing keywords:"):
+                        raw = mc.replace("Missing keywords:", "").strip().rstrip(".")
+                        missing_kws = [k.strip() for k in raw.split(",")]
+                st.markdown("**Missing Keywords**")
+                if missing_kws:
+                    st.write(", ".join(missing_kws))
+                else:
+                    st.write("None")
+
+        # ── Sentence-level analysis ───────────────────────────────────────────
+        with st.expander("🔬 Sentence-Level Analysis", expanded=False):
+            if result["sentence_analysis"]:
+                for i, sa in enumerate(result["sentence_analysis"]):
+                    sim_pct = round(sa["similarity"] * 100, 1)
+                    cls = sa["classification"]
+                    color = {"strong": "🟢", "moderate": "🟡", "weak": "🟠", "irrelevant": "🔴"}.get(cls, "⚪")
+                    st.markdown(f"**Sentence {i+1}** {color} `{cls.upper()}` — Similarity: `{sim_pct}%`")
+                    sc1, sc2 = st.columns(2)
+                    with sc1:
+                        st.caption("Student:")
+                        st.write(sa["student_sentence"])
+                    with sc2:
+                        st.caption("Closest Model Sentence:")
+                        st.write(sa["closest_model_sentence"])
+                    st.divider()
+            else:
+                st.info("No sentence-level data available.")
+
+        # ── Export ────────────────────────────────────────────────────────────
+        st.markdown("---")
+        export_data = {
+            "question": question,
+            "score": result["score"],
+            "max_score": result["max_score"],
+            "score_label": result["score_label"],
+            "semantic_similarity_pct": result["semantic_similarity_pct"],
+            "keyword_coverage_pct": result["keyword_coverage_pct"],
+            "strengths": result["strengths"],
+            "missing_concepts": result["missing_concepts"],
+            "improvements": result["improvements"],
+        }
+        st.download_button(
+            label="⬇️ Export Result as JSON",
+            data=json.dumps(export_data, indent=2),
+            file_name="evaluation_result.json",
+            mime="application/json",
+        )

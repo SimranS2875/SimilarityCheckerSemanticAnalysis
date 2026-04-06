@@ -1,0 +1,65 @@
+[
+  {
+    "id": "TC001",
+    "type": "exact_match",
+    "question": "What is machine learning?",
+    "model_answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.",
+    "student_answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.",
+    "expected_score_min": 9.0,
+    "human_score": 10.0
+  },
+  {
+    "id": "TC002",
+    "type": "paraphrased",
+    "question": "What is machine learning?",
+    "model_answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.",
+    "student_answer": "Machine learning is a branch of AI that allows computers to learn from data and improve their performance over time without explicit programming.",
+    "expected_score_min": 6.5,
+    "human_score": 8.0
+  },
+  {
+    "id": "TC003",
+    "type": "partial_answer",
+    "question": "What is machine learning?",
+    "model_answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.",
+    "student_answer": "Machine learning helps computers learn from data.",
+    "expected_score_min": 3.0,
+    "human_score": 4.0
+  },
+  {
+    "id": "TC004",
+    "type": "irrelevant_answer",
+    "question": "What is machine learning?",
+    "model_answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.",
+    "student_answer": "The weather today is sunny and warm. I went to the park and had a great time with my friends.",
+    "expected_score_min": 0.0,
+    "human_score": 0.0
+  },
+  {
+    "id": "TC005",
+    "type": "mixed_correctness",
+    "question": "What is machine learning?",
+    "model_answer": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.",
+    "student_answer": "Machine learning is related to artificial intelligence and involves data. However, it always requires explicit programming rules to function properly.",
+    "expected_score_min": 2.0,
+    "human_score": 3.5
+  },
+  {
+    "id": "TC006",
+    "type": "paraphrased",
+    "question": "Explain photosynthesis.",
+    "model_answer": "Photosynthesis is the process by which green plants use sunlight to synthesize nutrients from carbon dioxide and water, converting light energy into chemical energy stored in glucose.",
+    "student_answer": "Plants use sunlight, water, and CO2 to produce glucose and oxygen through photosynthesis. This is how they make their own food using solar energy.",
+    "expected_score_min": 6.0,
+    "human_score": 7.5
+  },
+  {
+    "id": "TC007",
+    "type": "partial_answer",
+    "question": "Describe Newton's second law.",
+    "model_answer": "Newton's second law states that force equals mass times acceleration (F=ma). The acceleration of an object is directly proportional to the net force and inversely proportional to its mass.",
+    "student_answer": "F equals ma.",
+    "expected_score_min": 2.0,
+    "human_score": 3.0
+  }
+]

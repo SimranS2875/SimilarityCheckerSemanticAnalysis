@@ -1,0 +1,158 @@
+[
+  {
+    "id": "TC001",
+    "type": "exact_match",
+    "question": "What is machine learning?",
+    "predicted_score": 10.0,
+    "human_score": 10.0,
+    "expected_score_min": 9.0,
+    "status": "PASS",
+    "semantic_similarity_pct": 100.0,
+    "keyword_coverage_pct": 100.0,
+    "score_label": "Excellent",
+    "strengths": [
+      "1 sentence(s) closely match the model answer.",
+      "Overall semantic meaning is well captured.",
+      "Good coverage of key concepts and terminology."
+    ],
+    "missing_concepts": [],
+    "improvements": [
+      "Keep up the good work. Minor refinements can push the score higher."
+    ]
+  },
+  {
+    "id": "TC002",
+    "type": "paraphrased",
+    "question": "What is machine learning?",
+    "predicted_score": 7.45,
+    "human_score": 8.0,
+    "expected_score_min": 6.5,
+    "status": "PASS",
+    "semantic_similarity_pct": 89.3,
+    "keyword_coverage_pct": 40.0,
+    "score_label": "Good",
+    "strengths": [
+      "1 sentence(s) closely match the model answer.",
+      "Overall semantic meaning is well captured."
+    ],
+    "missing_concepts": [
+      "Missing keywords: subset, artificial, intelligence, enables, systems, experience."
+    ],
+    "improvements": [
+      "Include more domain-specific terminology from the topic."
+    ]
+  },
+  {
+    "id": "TC003",
+    "type": "partial_answer",
+    "question": "What is machine learning?",
+    "predicted_score": 6.41,
+    "human_score": 4.0,
+    "expected_score_min": 3.0,
+    "status": "PASS",
+    "semantic_similarity_pct": 78.7,
+    "keyword_coverage_pct": 30.0,
+    "score_label": "Average",
+    "strengths": [
+      "1 sentence(s) closely match the model answer.",
+      "Overall semantic meaning is well captured."
+    ],
+    "missing_concepts": [
+      "Missing keywords: subset, artificial, intelligence, enables, systems, improve, experience."
+    ],
+    "improvements": [
+      "Include more domain-specific terminology from the topic.",
+      "Expand your answer with more detail and examples."
+    ]
+  },
+  {
+    "id": "TC004",
+    "type": "irrelevant_answer",
+    "question": "What is machine learning?",
+    "predicted_score": 0.01,
+    "human_score": 0.0,
+    "expected_score_min": 0.0,
+    "status": "PASS",
+    "semantic_similarity_pct": 0.2,
+    "keyword_coverage_pct": 0.0,
+    "score_label": "Poor",
+    "strengths": [],
+    "missing_concepts": [
+      "Missing keywords: machine, learning, subset, artificial, intelligence, enables, systems, learn.",
+      "2 sentence(s) have low relevance to the model answer."
+    ],
+    "improvements": [
+      "Try to align your answer more closely with the core concepts.",
+      "Include more domain-specific terminology from the topic.",
+      "Expand your answer with more detail and examples."
+    ]
+  },
+  {
+    "id": "TC005",
+    "type": "mixed_correctness",
+    "question": "What is machine learning?",
+    "predicted_score": 6.66,
+    "human_score": 3.5,
+    "expected_score_min": 2.0,
+    "status": "PASS",
+    "semantic_similarity_pct": 73.7,
+    "keyword_coverage_pct": 50.0,
+    "score_label": "Average",
+    "strengths": [
+      "1 sentence(s) closely match the model answer.",
+      "Overall semantic meaning is well captured."
+    ],
+    "missing_concepts": [
+      "Missing keywords: subset, enables, systems, improve, experience.",
+      "1 sentence(s) have low relevance to the model answer."
+    ],
+    "improvements": [
+      "Expand your answer with more detail and examples."
+    ]
+  },
+  {
+    "id": "TC006",
+    "type": "paraphrased",
+    "question": "Explain photosynthesis.",
+    "predicted_score": 6.61,
+    "human_score": 7.5,
+    "expected_score_min": 6.0,
+    "status": "PASS",
+    "semantic_similarity_pct": 77.2,
+    "keyword_coverage_pct": 40.0,
+    "score_label": "Average",
+    "strengths": [
+      "1 sentence(s) closely match the model answer.",
+      "Overall semantic meaning is well captured."
+    ],
+    "missing_concepts": [
+      "Missing keywords: process, green, synthesize, nutrients, carbon, dioxide.",
+      "1 sentence(s) have low relevance to the model answer."
+    ],
+    "improvements": [
+      "Include more domain-specific terminology from the topic.",
+      "Expand your answer with more detail and examples."
+    ]
+  },
+  {
+    "id": "TC007",
+    "type": "partial_answer",
+    "question": "Describe Newton's second law.",
+    "predicted_score": 3.34,
+    "human_score": 3.0,
+    "expected_score_min": 2.0,
+    "status": "PASS",
+    "semantic_similarity_pct": 43.4,
+    "keyword_coverage_pct": 10.0,
+    "score_label": "Below Average",
+    "strengths": [],
+    "missing_concepts": [
+      "Missing keywords: newton, second, law, states, force, mass, times, acceleration."
+    ],
+    "improvements": [
+      "Try to align your answer more closely with the core concepts.",
+      "Include more domain-specific terminology from the topic.",
+      "Expand your answer with more detail and examples."
+    ]
+  }
+]
