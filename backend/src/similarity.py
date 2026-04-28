@@ -31,8 +31,14 @@ def sentence_level_similarity(
     if not student_sentences or not model_sentences:
         return []
 
-    student_embs = get_embedding(student_sentences, model_name)
-    model_embs = get_embedding(model_sentences, model_name)
+    # Embed all sentences together so they share the same vector space.
+    # This is critical for the TF-IDF fallback where separate fit() calls
+    # produce incompatible vocabulary dimensions.
+    all_sentences = student_sentences + model_sentences
+    all_embs = get_embedding(all_sentences, model_name)
+
+    student_embs = all_embs[:len(student_sentences)]
+    model_embs   = all_embs[len(student_sentences):]
 
     results = []
     for i, s_emb in enumerate(student_embs):

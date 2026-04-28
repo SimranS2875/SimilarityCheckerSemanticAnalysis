@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { EvaluateResponse, SentenceMatch } from "../services/api";
 import FeedbackList from "./FeedbackList";
-import { Brain, Tag, ChevronDown, TrendingUp, Percent, Hash } from "lucide-react";
+import { Brain, Tag, ChevronDown, TrendingUp, Percent, Hash, Bot } from "lucide-react";
 
 interface Props { result: EvaluateResponse }
 
@@ -191,6 +191,15 @@ export default function ResultCard({ result }: Props) {
             <StatCard label="Similarity" value={`${result.similarity}%`}               icon={Percent}    colorClass="text-sky-400" delay={0.4} />
             <StatCard label="Keywords"   value={`${result.keyword_coverage}%`}         icon={Hash}       colorClass="text-sky-400"    delay={0.5} />
             <StatCard label="Score"      value={`${result.score}/${result.max_score}`} icon={TrendingUp} colorClass={gradeColor}      delay={0.6} />
+            {result.ai_detection && (
+              <StatCard
+                label="AI Probability"
+                value={`${result.ai_detection.ai_probability_pct}%`}
+                icon={Bot}
+                colorClass={result.ai_detection.ai_probability_pct >= 75 ? "text-rose-400" : result.ai_detection.ai_probability_pct >= 50 ? "text-amber-400" : "text-emerald-400"}
+                delay={0.7}
+              />
+            )}
           </div>
         </div>
 

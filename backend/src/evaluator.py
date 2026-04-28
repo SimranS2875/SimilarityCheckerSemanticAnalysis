@@ -6,7 +6,7 @@ Main evaluation pipeline orchestrator.
 from typing import Dict, Any
 
 from backend.src.preprocessing import preprocess, split_into_sentences
-from backend.src.embedding import get_embedding
+from backend.src.embedding import get_embedding, get_embeddings_pair
 from backend.src.similarity import cosine_similarity, sentence_level_similarity
 from backend.src.scoring import keyword_coverage, compute_hybrid_score
 from backend.src.feedback import generate_feedback
@@ -26,8 +26,7 @@ def evaluate(
     model_sentences = split_into_sentences(clean_model)
     student_sentences = split_into_sentences(clean_student)
 
-    model_emb = get_embedding(clean_model, model_name)
-    student_emb = get_embedding(clean_student, model_name)
+    model_emb, student_emb = get_embeddings_pair(clean_model, clean_student, model_name)
 
     sem_sim = cosine_similarity(model_emb, student_emb)
     kw_cov, model_kws, missing_kws = keyword_coverage(clean_model, clean_student)
